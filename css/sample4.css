@@ -1,0 +1,79 @@
+* {
+    font-family: 'ヒラギノ角ゴシック','メイリオ',serif;
+}
+#myTable .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#myTable .action {
+    margin: 8px 0;
+}
+#myTable .action .disabled {
+    color: #ccc;
+}
+#myTable table {
+    border-collapse: collapse;
+    margin-bottom: 5px;
+}
+#myTable th,
+#myTable td {
+    padding: 5px 10px;
+    font-weight: normal;
+    text-align: left;
+    min-width: 50px;
+    border: solid 1px #666;
+}
+#myTable th {
+    color: #fff;
+    background-color: #009;
+    cursor: pointer;
+ }
+#myTable .list-table td:nth-child(1) {
+    text-align: right;
+    padding-right: 15px;
+}
+#myTable .list-table td:nth-child(2) {
+    width: 200px;
+}
+#myTable .list-table td:nth-child(3) {
+    width: 250px;
+}
+#myTable .list-table td:nth-child(4) {
+    text-align: center;
+}
+#myTable .list-table .selected {
+    background-color: #ddf;
+    cursor: pointer;
+}
+#myTable .list-table .selectable {
+    cursor: pointer;
+}
+@media (hover: hover) {
+    #myTable .list-table .selected:hover,
+    #myTable .list-table .selectable:hover {
+        background-color: #eef;
+    }
+}
+#myTable .pager {
+    display: flex;
+    justify-content: space-between;
+}
+#myTable .rows-unit,
+#myTable .page-unit {
+    font-size: 8pt;
+}
+#myTable .emsg {
+    font-size: 10pt;
+    color: #c00;
+}
+#myTable input[type=checkbox] {
+    width: 22px;
+    height: 22px;
+    margin-top: 8px;
+}
+#myTable .detail-table textarea {
+    background-color: #eef;
+    border: solid 1px #339;
+    width: 300px;
+    height: 100px;
+}

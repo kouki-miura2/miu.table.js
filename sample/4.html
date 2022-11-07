@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>miu.table.js</title>
+<link href="../css/sample4.css" rel="stylesheet">
+<script src="../js/miu.table.js"></script>
+<script>
+window.onload = function() {
+    let tbl = new miu.table('myTable');
+    tbl.set({
+        'title' : 'ユーザー管理',
+        'action': {'C':'追加','R':'参照','U':'編集','D':'削除'},
+        'names' : ['No','ID','メールアドレス','管理者フラグ'],
+        'keys'  : ['number','id','mail','admin'],
+        'types' : ['number','text','text','bool'],
+        'psize' : [5,10],
+        'rdiv'  : ',',
+        'runit' : ' 行表示',
+        'pdiv'  : ' | ',
+        'punit' : ' ページ',
+        'pfill' : true,
+        'sort'  : true
+    });
+    tbl.init([
+        {'number':1,'id':'Administrator','password':'','mail':'admin@example.com','admin':1,'note':''},
+        {'number':2,'id':'testuser1','password':'','mail':'test1@example.com','admin':0,'note':''},
+        {'number':3,'id':'testuser2','password':'','mail':'test2@example.com','admin':1,'note':'11/7 管理者権限付与'},
+        {'number':4,'id':'testuser3','password':'','mail':'test3@example.com','admin':0,'note':''},
+        {'number':5,'id':'guest1','password':'','mail':null,'admin':0,'note':''},
+        {'number':6,'id':'guest2','password':'','mail':null,'admin':0,'note':''}
+    ]);
+    tbl.setpp({
+        'reenter' : 'パスワードを再入力してください',
+        'notmatch': 'パスワードが一致しませんでした。再度入力してください'
+    });
+    tbl.C = {
+        'title': 'ユーザー登録',
+        'action': {'CANCEL':'取消','CONFIRM':'確認','RETURN':'戻る','COMMIT':'登録'},
+        'names' : ['No','ID','パスワード','メールアドレス','管理者フラグ','備考'],
+        'keys'  : ['number','id','password','mail','admin','note'],
+        'types' : ['number','text','password','text','bool','textarea'],
+        'regex' : [/^[0-9]{1,3}$/,/^.{4,20}$/,/^.{8,20}$/,/^.{1,}\@.{1,}\..{1,}$/,null,/^[.\s\S]{0,20}$/],
+        'emsg'  : ['1～3桁の数値で入力してください','4～20文字で入力してください','8～20文字で入力してください','メールアドレス形式で入力してください',null,'20文字までで入力してください'],
+        'func'  : function(temp) {
+            // create for db
+            ;
+
+            alert(temp.id + ' を登録しました。');
+            return true; // if successed return true
+        }
+    };
+    tbl.R = {
+        'action': {'CANCEL':'戻る'},
+        'names' : ['No','ID','パスワード','メールアドレス','管理者フラグ','備考'],
+        'keys'  : ['number','id','password','mail','admin','note'],
+        'types' : ['number','text','password','text','bool','textarea']
+    };
+    tbl.U = {
+        'action': {'CANCEL':'取消','CONFIRM':'確認','RETURN':'戻る','COMMIT':'更新'},
+        'names' : ['No','ID','パスワード','メールアドレス','管理者フラグ','備考'],
+        'keys'  : ['number','id','password','mail','admin','note'],
+        'types' : ['number','text','password','text','bool','textarea'],
+        'regex' : [/^[0-9]{1,3}$/,/^.{4,20}$/,/^.{8,20}$/,/^.{1,}\@.{1,}\..{1,}$/,null,/^[.\s\S]{0,20}$/],
+        'emsg'  : ['1～3桁の数値で入力してください','4～20文字で入力してください','8～20文字で入力してください','メールアドレス形式で入力してください',null,'20文字までで入力してください'],
+        'func'  : function(temp) {
+            // update for db
+            ;
+
+            alert(temp.id + ' を更新しました。');
+            return true; // if successed return true
+        }
+    };
+    tbl.D = {
+        'action': {'CANCEL':'取消','CONFIRM':'削除'},
+        'names' : ['No','ID','管理者フラグ'],
+        'keys'  : ['number','id','admin'],
+        'types' : ['number','text','bool'],
+        'func'  : function(temp) {
+            // delete for db
+            ;
+
+            alert(temp.id + ' を削除しました。');
+            return true; // if successed return true
+        }
+    };
+};
+</script>
+</head>
+<body>
+
+miu-table.js<br>
+<br>
+パスワード項目とブール項目を含むCRUDを有効にしたテーブル表示・編集。<br>
+<hr>
+
+<div id="myTable"></div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+* {
+    font-family: 'ヒラギノ角ゴシック','メイリオ',serif;
+}
+#myTable .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#myTable table {
+    border-collapse: collapse;
+    margin-bottom: 5px;
+}
+#myTable th,
+#myTable td {
+    padding: 5px 10px;
+    font-weight: normal;
+    text-align: left;
+    min-width: 50px;
+    border: solid 1px #666;
+}
+#myTable th {
+    color: #fff;
+    background-color: #009;
+    cursor: pointer;
+ }
+#myTable .list-table td:nth-child(1),
+#myTable .list-table td:nth-child(3) {
+    text-align: right;
+    padding-right: 15px;
+}
+#myTable .list-table td:nth-child(2) {
+    width: 200px;
+}
+#myTable .pager {
+    display: flex;
+    justify-content: space-between;
+}
+#myTable .rows-unit,
+#myTable .page-unit {
+    font-size: 8pt;
+}
