@@ -77,3 +77,7 @@
     width: 300px;
     height: 100px;
 }
+#myTable .detail-table.r tr:nth-child(6) td {
+    height: 80px;
+    background-color: #eee;
+}

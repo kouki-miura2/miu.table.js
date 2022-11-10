@@ -375,7 +375,7 @@ miu.table = function(id) {
 
     this._detailTable = function(mode, cnfm) {
         let tbl = document.createElement('table');
-        tbl.className = 'detail-table';
+        tbl.className = 'detail-table ' + mode.toLowerCase();
         var firstTd = null;
         for (let i = 0; i < this[mode].names.length; i++) {
             let r = tbl.insertRow();
