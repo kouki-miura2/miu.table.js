@@ -77,6 +77,10 @@
     width: 300px;
     height: 100px;
 }
+#myTable .detail-table.u input[readonly] {
+    background-color: #fee;
+    border: solid 1px #666;
+}
 #myTable .detail-table.r tr:nth-child(6) td {
     height: 80px;
     background-color: #eee;
