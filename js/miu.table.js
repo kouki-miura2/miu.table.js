@@ -51,6 +51,8 @@ miu.table = function(id) {
     // p.punit : ' page'
     // p.pfill : true
     // p.sort  : true
+    // p.listCb   : function(){}
+    // p.detailCb : function(){}
     this.set = function(p) {
         this.p = p;
     };
@@ -90,6 +92,10 @@ miu.table = function(id) {
     };
 
     this._list = function() {
+        // callback
+        if (this.p.listCb) {
+            this.p.listCb();
+        }
         // purge
         while (this.div.firstChild) {
             this.div.removeChild(this.div.firstChild);
@@ -323,6 +329,10 @@ miu.table = function(id) {
 
     // mode = 'C','R','U','D'
     this._detail = function(mode, cnfm=false) {
+        // callback
+        if (this.p.detailCb) {
+            this.p.detailCb();
+        }
         // set params
         if (this[mode] == null) {
             this[mode] = {
@@ -337,9 +347,10 @@ miu.table = function(id) {
             this.div.removeChild(this.div.firstChild);
         }
         // title
-        this._title('title' in this[mode] ?
-            this[mode].title :
-                this.p.title + ' | ' + this.p.action[mode]);
+        if ('title' in this[mode] || 'title' in this.p) {
+            this._title('title' in this[mode] ?
+                this[mode].title : this.p.title + ' | ' + this.p.action[mode]);
+        }
         // cancel
         this._cancelAction(mode, cnfm);
         // detail table
@@ -400,11 +411,16 @@ miu.table = function(id) {
     };
 
     this._item = function(td, mode, cnfm, iidx) {
+        var readonly = '';
+        if (mode == 'U' && 'pk' in this[mode] && 0 <= this[mode].pk.indexOf(this[mode].keys[iidx])) {
+            readonly = ' readonly';
+        }
+
         let type = this[mode].types[iidx] == 'bool' ?
             'checkbox' : this[mode].types[iidx];
         if ((mode == 'C' || mode == 'U') && !cnfm) {
             td.innerHTML = type != 'textarea' ?
-                '<input type="' + type + '">' :
+                '<input type="' + type + '"' + readonly + '>' :
                 '<textarea></textarea>';
             if (this.temp) {
                 let input = td.firstChild;
