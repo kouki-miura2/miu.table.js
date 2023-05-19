@@ -276,7 +276,7 @@ CRUDを有効にしたテーブル表示・編集。<br>
 
 ### sample5.html
 データソース以外を表示するカスタム列。<br>
-データソースのキーを":(キー名)"で参照できる。<br>
+データソースの値を":(キー名)"で参照できる。<br>
 ![sample5](sample/img/sample5.png "SAMPLE5")
 ~~~
     let tbl = new miu.table('myTable');
