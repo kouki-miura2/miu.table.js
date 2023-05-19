@@ -273,3 +273,34 @@ CRUDを有効にしたテーブル表示・編集。<br>
         }
     };
 ~~~
+
+### sample5.html
+データソース以外を表示するカスタム列。<br>
+データソースのキーを":(キー名)"で参照できる。<br>
+![sample5](sample/img/sample5.png "SAMPLE5")
+~~~
+    let tbl = new miu.table('myTable');
+    tbl.set({
+        'title' : '動物ランキング',
+        'names' : ['順位','動物','点数','カスタム'],
+        'keys'  : ['number','animal','points',''],
+        'types' : ['number','text','number','custom-example'],
+        'custom': {
+            'example': '<a href="javascript:null"'
+                + ' onclick="alert(\'点数= :points 点\'); return false;">動物=:animal</a>'
+        }
+    });
+    tbl.init([
+        {'number':1,'animal':'イヌ','points':99.9},
+        {'number':2,'animal':'ネコ','points':95.1},
+        {'number':3,'animal':'ハムスター','points':92.4},
+        {'number':4,'animal':'ウサギ','points':89.8},
+        {'number':5,'animal':'キタキツネ','points':88.1},
+        {'number':6,'animal':'エゾシカ','points':86.7},
+        {'number':7,'animal':'エゾリス','points':85.5},
+        {'number':8,'animal':'タヌキ','points':82.6},
+        {'number':9,'animal':'アライグマ','points':80.9},
+        {'number':10,'animal':'ラッコ','points':78.1},
+        {'number':11,'animal':'カナヘビ','points':76.8}
+    ]);
+~~~
