@@ -1,6 +1,6 @@
 // miu.table.js
-// v1.0
-// (c)2022 miu-soft
+// v1.0.1
+// (c)2022-2023 miu-soft
 // MIT license - https://opensource.org/licenses/MIT
 
 var miu = miu || {};
@@ -53,6 +53,8 @@ miu.table = function(id) {
     // p.sort  : true
     // p.listCb   : function(){}
     // p.detailCb : function(){}
+    // p.boolY : 'Y'
+    // p.boolN : 'N'
     this.set = function(p) {
         this.p = p;
     };
@@ -211,7 +213,7 @@ miu.table = function(id) {
             this.p.keys.forEach (function (k) {
                 let td = document.createElement('td');
                 if (i < dend) {
-                    td.innerText = my._viewText(my.p.types[j], my.data[i][k]);
+                    td.innerHTML = my._viewText(my.p.types[j], my.data[i][k], my.data[i]);
                 } else {
                     r.className = 'no-data';
                     td.innerHTML = '&nbsp;';
@@ -227,11 +229,24 @@ miu.table = function(id) {
         this.div.appendChild(tbl);
     };
 
-    this._viewText = function(type, val) {
+    this._viewText = function(type, val, data) {
         if (type == 'bool') {
-            return val ? 'Y' : 'N';
+            return val ?
+                (this.p.boolY ? this.p.boolY : 'Y') :
+                (this.p.boolN ? this.p.boolN : 'N');
         } else if (type == 'password') {
             return val.replace(/./g, '*');
+        } else if (0 === type.indexOf('custom-')) {
+            let ckey = type.substr(type.indexOf('-') + 1);
+            let html = this.p.custom[ckey];
+            this.p.keys.forEach (function (k) {
+                if (0 <= html.indexOf(':' + k)) {
+                    html = html.replace(':' + k, data[k]);
+                }
+            });
+            return html;
+        } else if (type == '') {
+            return '';
         }
         return val;
     };
@@ -291,6 +306,9 @@ miu.table = function(id) {
         div.className = 'pages';
 
         let pmax = (this.data.length - 1) / this.psize + 1;
+        if (pmax < 1) {
+            pmax = 1;
+        }
         this.plist = [];
         for (let i = 1; i <= pmax; i++) {
             if (1 < i) {
